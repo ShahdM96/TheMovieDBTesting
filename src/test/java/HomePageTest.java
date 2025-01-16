@@ -11,10 +11,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePageTest {
     private WebDriver driver;
-    private static final String baseURL ="http://localhost:3000";
+    //private static final String baseURL ="http://localhost:3000";
     HomePage home;
 
 
@@ -22,8 +23,6 @@ public class HomePageTest {
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(baseURL);
         home = new HomePage(driver);
     }
 
@@ -52,11 +51,7 @@ public class HomePageTest {
     @Test
     void testChangeLanguage() throws InterruptedException {
         home.changeLanguage("Deutsch");
-        Thread.sleep(10000);
-
-        driver.navigate().refresh();
-
-        Thread.sleep(10000);
+        Thread.sleep(5000);
 
     }
     @Test
@@ -67,40 +62,12 @@ public class HomePageTest {
         }
     }
     @Test
-    void testPageTitle() {
-        driver.get(baseURL);
-        String actualTitle = driver.getTitle();
-        String expectedPageTitle = "Nuxt Movies";
-        assertEquals(expectedPageTitle, actualTitle);
-
-        //System.out.println("Homepage title is: " + actualTitle);
+    void testPageIsLoaded() {
+        assertTrue(home.isPageLoaded());
 
     }
 
-/**
-    @Test
-    void test1() {
-        driver.get(baseURL);
-        //explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
-        // Wait for the element to be visible
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//h1)[1]")));
-        String expectedText = "Sonic the Hedgehog 3";
-        String actualText = element.getText();
-        assertEquals(expectedText,actualText, "Incorrect Text");
 
-    }
-
-    @Test
-    void testPopularMoviesTitle() {
-        driver.get(baseURL);
-        driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
-        WebElement element = driver.findElement(By.xpath("//div[@data-v-inspector='components/carousel/Base.vue:21:5']"));
-        String expectedText = "Popular Movies";
-        String actualText = element.getText();
-        assertEquals(expectedText,actualText, "Incorrect Title");
-    }
- **/
     @AfterEach
     public void tearDown() {
         driver.quit();

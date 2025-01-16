@@ -15,27 +15,43 @@ public class HomePage {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private static final String baseURL ="http://localhost:3000";
 
-
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
 
     // Element Locators
-    private By homeButton = By.xpath("//div[contains(@class, 'i-ph-house-fill') and contains(@class, 'text-primary')]");
+    //private By homeButton = By.xpath("//div[contains(@class, 'i-ph-house-fill') and contains(@class, 'text-primary')]");
     private By moviesButton = By.xpath("//div[contains(@class, 'i-ph-film-strip')]");
     private By tvShowsButton = By.xpath("//div[contains(@class, 'i-ph-television-simple')]");
     private By searchButton = By.xpath("//div[contains(@class, 'i-ph-magnifying-glass')]");
     private By languageDropdown = By.xpath("//select[@id='langSwitcher']");
     private By scrollSuggestions = By.xpath("//div[@relative]//button[@type='button' and @title='Scroll right']");
     // SCROLL_SUGGESTIONS = "//div[contains(@class, 'scroll-suggestions')]"
-    // Methods
+
+
+
+    public HomePage(WebDriver driver) {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get(baseURL);
+    }
+
+    public boolean isPageLoaded(){
+        String actualTitle = driver.getTitle();
+        String expectedPageTitle = "Nuxt Movies";
+        return actualTitle.equals(expectedPageTitle);
+    }
+
+
+
+
+
 
     // Navigate to Home Page
-    public void clickHome() {
-        wait.until(ExpectedConditions.elementToBeClickable(homeButton)).click();
-    }
+//    public void clickHome() {
+//        wait.until(ExpectedConditions.elementToBeClickable(homeButton)).click();
+//    }
+
+    //public boolean
 
     // Navigate to Movies Page
     public void clickMovies() {
@@ -57,6 +73,7 @@ public class HomePage {
         By languageOptions = By.xpath("//select[@id='langSwitcher']/option[text()='" + languageValue + "']");
         driver.findElement(languageDropdown).click();
         driver.findElement(languageOptions).click();
+        driver.navigate().refresh();//Due to Bug
 
     }
 
