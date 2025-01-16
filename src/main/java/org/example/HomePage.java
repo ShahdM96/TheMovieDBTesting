@@ -73,24 +73,66 @@ public class HomePage {
     }
 
     // Change Language
-    public void changeLanguage(String languageValue) {
-        By languageOptions = By.xpath("//select[@id='langSwitcher']/option[text()='" + languageValue + "']");
+    public boolean changeLanguage(String languageValue) {
+        By languageOption = By.xpath("//select[@id='langSwitcher']/option[text()='" + languageValue + "']");
         driver.findElement(languageDropdown).click();
-        driver.findElement(languageOptions).click();
-        driver.navigate().refresh();//Due to Bug
+        driver.findElement(languageOption).click();
+        return checkLanguageChange(languageValue);
+        //driver.navigate().refresh();//Due to Bug
+    }
 
+    public boolean checkLanguageChange(String language){
+        //driver.get(baseURL);
+        //driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+        WebElement element = driver.findElement(By.xpath("//div[@data-v-inspector='components/carousel/Base.vue:21:5']"));
+        String actualText = element.getText();
+        String englishText = "Popular Movies";
+        String expectedText = englishText;
+        String germanText = "Beliebte Filme";
+        String spanishText = "Películas populares";
+        String italianText = "Film Popolari";
+        String japaneseText = "人気の映画";
+        String chineseText = "热门电影";
+        String portugueseText = "Filmes populares";
+        String portugueseBrazilText = "Filmes Populares";
+        String russianText = "Популярные фильмы";
+        String frenchText = "Films Populaires";
+        String ukrainianText = "Популярні фільми";
+        switch (language) {
+            case "English": expectedText = englishText;
+            case "Deutsch": expectedText = germanText;
+            case "Español": expectedText = spanishText;
+            case "Italiano": expectedText = italianText;
+            case "日本語": expectedText = japaneseText;
+            case "简体中文": expectedText = chineseText;
+            case "Português": expectedText = portugueseText;
+            case "Português do Brasil": expectedText = portugueseBrazilText;
+            case "Русский": expectedText = russianText;
+            case "Français": expectedText = frenchText;
+            case "Українська": expectedText = ukrainianText;
+            default: expectedText = englishText;
+        }
+        System.out.println("actual text is:" + actualText);
+        System.out.println("expected text is:" + expectedText);
+
+        return actualText.equals(expectedText);
     }
 
     // Scroll through suggestions
-    public void checkScrollSuggestions() throws InterruptedException {
+    public boolean scrollToElement() throws InterruptedException {
         //List<WebElement> suggestions = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(scrollSuggestions));
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(scrollSuggestions));
         Thread.sleep(3000);
-        //scroll till you find the movie "dirty angles"
+        //Scroll till you find the movie "dirty angles"
         WebElement targetElement = driver.findElement(By.xpath("//a[@href='/movie/1043905']"));
 
         Actions actions = new Actions(driver);
         actions.scrollToElement(targetElement).perform();
+        //Return if the target movie is displayed on the screen
+        return targetElement.isDisplayed();
+
+        // Assert that the element is displayed
+        //Assert.assertTrue(element.isDisplayed(), "Element is not displayed on the page!");
 //        element.click();
 //        element.click();
 //        element.click();
@@ -102,7 +144,7 @@ public class HomePage {
     }
 
     // Scroll to an element using JavaScript
-    public void scrollToElement(By elementLocator) {
+    public void checkScrollSuggestions(By elementLocator) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(elementLocator));
         element.click();
         element.click();

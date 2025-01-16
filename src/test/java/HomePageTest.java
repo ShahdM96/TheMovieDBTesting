@@ -4,16 +4,9 @@ import org.example.TVShowsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import org.example.HomePage;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePageTest {
@@ -47,7 +40,6 @@ public class HomePageTest {
     void testTVShowsButton() throws InterruptedException {
         TVShowsPage tvshowspage = home.clickTvShows();
         assertTrue(tvshowspage.isPageLoaded());
-
     }
 
     @Test
@@ -55,23 +47,24 @@ public class HomePageTest {
         SearchPage searchpage = home.clickSearch();
         assertTrue(searchpage.isPageLoaded());
 
-        Thread.sleep(5000);
-
     }
 
 
     @Test
     void testChangeLanguage() throws InterruptedException {
-        home.changeLanguage("Deutsch");
+        String language = "Español";
+        boolean bool = home.changeLanguage(language);
         Thread.sleep(5000);
 
+
+        assertTrue(bool);
     }
+
+
     @Test
     void testScrollSuggestions() throws InterruptedException {
-        {
-            home.checkScrollSuggestions();
-            Thread.sleep(5000);
-        }
+            boolean display = home.scrollToElement();
+            assertTrue(display);
     }
 
     @AfterEach
