@@ -49,13 +49,19 @@ public class HomePage {
 
 
     // Navigate to Movies Page
-    public void clickMovies() {
+    public MoviePage clickMovies() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(moviesButton)).click();
+        Thread.sleep(3000);
+        MoviePage moviePage = new MoviePage(driver);
+        return moviePage;
     }
 
     // Navigate to TV Shows Page
-    public void clickTvShows() {
+    public TVShowsPage clickTvShows() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(tvShowsButton)).click();
+        Thread.sleep(3000);
+        TVShowsPage tvshowsPage = new TVShowsPage(driver);
+        return  tvshowsPage;
     }
 
     // Navigate to Search Page

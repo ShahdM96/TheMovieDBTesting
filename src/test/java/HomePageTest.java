@@ -1,3 +1,5 @@
+import org.example.MoviePage;
+import org.example.TVShowsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,24 +29,23 @@ public class HomePageTest {
 
 
     @Test
-    void testHomeButton() throws InterruptedException {
+    void testHomeButton(){
         home.clickHome();
         assertTrue(home.isPageLoaded());
-        Thread.sleep(5000);
     }
 
 
     @Test
     void testMoviesButton() throws InterruptedException {
-        home.clickMovies();
-        Thread.sleep(5000);
+        MoviePage moviepage = home.clickMovies();
+        assertTrue(moviepage.isPageLoaded());
     }
 
 
     @Test
     void testTVShowsButton() throws InterruptedException {
-        home.clickTvShows();
-        Thread.sleep(5000);
+        TVShowsPage tvshowspage = home.clickTvShows();
+        assertTrue(tvshowspage.isPageLoaded());
 
     }
 
