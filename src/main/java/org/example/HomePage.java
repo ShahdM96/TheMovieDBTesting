@@ -65,8 +65,11 @@ public class HomePage {
     }
 
     // Navigate to Search Page
-    public void clickSearch() {
+    public SearchPage clickSearch() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        Thread.sleep(3000);
+        SearchPage searchpage = new SearchPage(driver);
+        return searchpage;
     }
 
     // Change Language

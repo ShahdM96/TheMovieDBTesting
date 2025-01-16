@@ -1,4 +1,5 @@
 import org.example.MoviePage;
+import org.example.SearchPage;
 import org.example.TVShowsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,7 +52,9 @@ public class HomePageTest {
 
     @Test
     void testSearchButton() throws InterruptedException {
-        home.clickSearch();
+        SearchPage searchpage = home.clickSearch();
+        assertTrue(searchpage.isPageLoaded());
+
         Thread.sleep(5000);
 
     }
@@ -70,12 +73,6 @@ public class HomePageTest {
             Thread.sleep(5000);
         }
     }
-//    @Test
-//    void testPageIsLoaded() {
-//        assertTrue(home.isPageLoaded());
-//
-//    }
-
 
     @AfterEach
     public void tearDown() {
