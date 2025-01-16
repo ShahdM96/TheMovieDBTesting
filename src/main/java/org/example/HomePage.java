@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,17 +20,17 @@ public class HomePage {
 
 
     // Element Locators
-    //private By homeButton = By.xpath("//div[contains(@class, 'i-ph-house-fill') and contains(@class, 'text-primary')]");
+    private By homeButton = By.xpath("//div[contains(@class, 'i-ph-house-fill')]");
     private By moviesButton = By.xpath("//div[contains(@class, 'i-ph-film-strip')]");
     private By tvShowsButton = By.xpath("//div[contains(@class, 'i-ph-television-simple')]");
     private By searchButton = By.xpath("//div[contains(@class, 'i-ph-magnifying-glass')]");
     private By languageDropdown = By.xpath("//select[@id='langSwitcher']");
     private By scrollSuggestions = By.xpath("//div[@relative]//button[@type='button' and @title='Scroll right']");
-    // SCROLL_SUGGESTIONS = "//div[contains(@class, 'scroll-suggestions')]"
 
 
 
     public HomePage(WebDriver driver) {
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get(baseURL);
@@ -41,17 +42,11 @@ public class HomePage {
         return actualTitle.equals(expectedPageTitle);
     }
 
-
-
-
-
-
     // Navigate to Home Page
-//    public void clickHome() {
-//        wait.until(ExpectedConditions.elementToBeClickable(homeButton)).click();
-//    }
+    public void clickHome() {
+        wait.until(ExpectedConditions.elementToBeClickable(homeButton)).click();
+    }
 
-    //public boolean
 
     // Navigate to Movies Page
     public void clickMovies() {

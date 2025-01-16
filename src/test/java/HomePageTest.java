@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePageTest {
     private WebDriver driver;
-    //private static final String baseURL ="http://localhost:3000";
     HomePage home;
 
 
@@ -25,6 +24,15 @@ public class HomePageTest {
         driver = new ChromeDriver();
         home = new HomePage(driver);
     }
+
+
+    @Test
+    void testHomeButton() throws InterruptedException {
+        home.clickHome();
+        assertTrue(home.isPageLoaded());
+        Thread.sleep(5000);
+    }
+
 
     @Test
     void testMoviesButton() throws InterruptedException {
@@ -61,11 +69,11 @@ public class HomePageTest {
             Thread.sleep(5000);
         }
     }
-    @Test
-    void testPageIsLoaded() {
-        assertTrue(home.isPageLoaded());
-
-    }
+//    @Test
+//    void testPageIsLoaded() {
+//        assertTrue(home.isPageLoaded());
+//
+//    }
 
 
     @AfterEach
