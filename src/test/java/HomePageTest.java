@@ -19,7 +19,6 @@ public class HomePageTest {
 
 
 
-
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
