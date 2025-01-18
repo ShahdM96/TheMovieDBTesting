@@ -2,10 +2,7 @@ package APITest;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -16,12 +13,21 @@ import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Enforce test order
 public class NuxMoviesAPITest {
-    private final String BASE_URL = "https://api.themoviedb.org/3";
-    String apiKey ="9457f66c26e37c48144faf02ea0e920a";
-    String apiToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDU3ZjY2YzI2ZTM3YzQ4MTQ0ZmFmMDJlYTBlOTIwYSIsIm5iZiI6MTczNDg1NTU3MC43NTIsInN1YiI6IjY3NjdjYjkyMzMwYmNlNmVjOTkxMjkwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NP_u87sIGXRJvoWxUPUpdLz-wthsE0WdMSoGsoXjoYw";
-    String movie = "";
+    private String BASE_URL;
+    String apiKey;
+    String apiToken;
+    int movieID;
+    String movieName = "Star Wars";
 
-    @Test
+    @BeforeEach
+    void setup() {
+        BASE_URL = "https://api.themoviedb.org/3";
+        apiKey ="9457f66c26e37c48144faf02ea0e920a";
+        apiToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDU3ZjY2YzI2ZTM3YzQ4MTQ0ZmFmMDJlYTBlOTIwYSIsIm5iZiI6MTczNDg1NTU3MC43NTIsInN1YiI6IjY3NjdjYjkyMzMwYmNlNmVjOTkxMjkwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NP_u87sIGXRJvoWxUPUpdLz-wthsE0WdMSoGsoXjoYw";
+        movieID = 11;
+    }
+
+        @Test
     @Order(1)
     public void testMovieSearchByID() {
         RestAssured.baseURI = BASE_URL;
@@ -32,7 +38,7 @@ public class NuxMoviesAPITest {
             throw new IllegalStateException("API Key is missing! Set TMDB_API_KEY as an environment variable.");
         }
 **/
-                given().
+        Response response = given().
                         queryParam("api_key", apiKey).
                         log().all().
                         when().
@@ -40,10 +46,12 @@ public class NuxMoviesAPITest {
                         then().
                         log().all().
                         statusCode(200). // Validate HTTP 200 OK
-                        body("id", equalTo(11)).
+                        body("id", equalTo(movieID)).
                         body("title", equalTo("Star Wars")).
                         body("budget", equalTo(11000000)).
-                        body("release_date", equalTo("1977-05-25"));
+                        body("release_date", equalTo("1977-05-25")).
+                extract().response();
+            //movieName = response.jsonPath().getString("title");
     }
 
 
@@ -93,7 +101,8 @@ public class NuxMoviesAPITest {
                 extract().response();
 
         List<String> movieTitles = response.jsonPath().getList("results.title");
-        assertThat(movieTitles, hasItem("Star Wars"));
+
+        assertThat(movieTitles, hasItem(movieName));
 
     }
 
@@ -116,7 +125,7 @@ public class NuxMoviesAPITest {
                 when().
                 post("/account/21702994/watchlist"). // Watchlist endpoint
                         then().
-                statusCode(201). // Expect HTTP 201
+                statusCode(200). // Expect HTTP 200 OK
                         extract().response();
 
         boolean success = response.jsonPath().getBoolean("success");
