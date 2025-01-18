@@ -25,7 +25,6 @@ public class NuxMoviesAPITest {
     @Order(1)
     public void testMovieSearchByID() {
         RestAssured.baseURI = BASE_URL;
-
 /**
         // Retrieve API Key from Environment Variable
         String apiKey = System.getenv("TMDB_API_KEY");
@@ -96,6 +95,32 @@ public class NuxMoviesAPITest {
         List<String> movieTitles = response.jsonPath().getList("results.title");
         assertThat(movieTitles, hasItem("Star Wars"));
 
+    }
+
+    @Test
+    @Order(4)
+    public void testDeleteFromWatchlist() {
+        RestAssured.baseURI = BASE_URL;
+        String requestBody = """
+                {
+                  "media_type": "movie",
+                  "media_id": 11,
+                  "watchlist": false
+                }""";
+
+        Response response = given().
+                header("Authorization", "Bearer " + apiToken).
+                header("accept", "application/json").
+                header("content-type", "application/json").
+                body(requestBody).
+                when().
+                post("/account/21702994/watchlist"). // Watchlist endpoint
+                        then().
+                statusCode(201). // Expect HTTP 201
+                        extract().response();
+
+        boolean success = response.jsonPath().getBoolean("success");
+        assertThat(success, equalTo(true));
     }
 
 
