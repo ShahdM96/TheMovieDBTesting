@@ -2,7 +2,10 @@ package APITest;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.List;
 
@@ -10,6 +13,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Enforce test order
 public class NuxMoviesAPITest {
     private final String BASE_URL = "https://api.themoviedb.org/3";
     String apiKey ="9457f66c26e37c48144faf02ea0e920a";
@@ -17,6 +22,7 @@ public class NuxMoviesAPITest {
     String movie = "";
 
     @Test
+    @Order(1)
     public void testMovieSearchByID() {
         RestAssured.baseURI = BASE_URL;
 
@@ -43,6 +49,7 @@ public class NuxMoviesAPITest {
 
 
     @Test
+    @Order(2)
     public void testAddToWatchlist() {
         RestAssured.baseURI = BASE_URL;
         String requestBody = """
@@ -68,6 +75,7 @@ public class NuxMoviesAPITest {
     }
 
     @Test
+    @Order(3)
     public void testMovieInWatchlist() {
         RestAssured.baseURI = BASE_URL;
 
