@@ -33,6 +33,7 @@ public class HomePageTest {
     void testMoviesButton() throws InterruptedException {
         MoviePage moviepage = home.clickMovies();
         assertTrue(moviepage.isPageLoaded());
+
     }
 
 
