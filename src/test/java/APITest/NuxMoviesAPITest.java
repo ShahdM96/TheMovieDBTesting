@@ -27,10 +27,13 @@ public class NuxMoviesAPITest {
         movieID = 11;
     }
 
-        @Test
+    @Test
     @Order(1)
     public void testMovieSearchByID() {
+        BASE_URL = "https://api.themoviedb.org/3";
+
         RestAssured.baseURI = BASE_URL;
+
 /**
         // Retrieve API Key from Environment Variable
         String apiKey = System.getenv("TMDB_API_KEY");
@@ -58,6 +61,8 @@ public class NuxMoviesAPITest {
     @Test
     @Order(2)
     public void testAddToWatchlist() {
+        BASE_URL = "https://api.themoviedb.org/3";
+
         RestAssured.baseURI = BASE_URL;
         String requestBody = """
                 {
@@ -84,6 +89,8 @@ public class NuxMoviesAPITest {
     @Test
     @Order(3)
     public void testMovieInWatchlist() {
+        BASE_URL = "https://api.themoviedb.org/3";
+
         RestAssured.baseURI = BASE_URL;
 
         Response response = given().
@@ -109,6 +116,8 @@ public class NuxMoviesAPITest {
     @Test
     @Order(4)
     public void testDeleteFromWatchlist() {
+        BASE_URL = "https://api.themoviedb.org/3";
+
         RestAssured.baseURI = BASE_URL;
         String requestBody = """
                 {
