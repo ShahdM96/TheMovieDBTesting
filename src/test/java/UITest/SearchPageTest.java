@@ -2,6 +2,7 @@ package UITest;
 
 import org.example.DriverFactory;
 import org.example.HomePage;
+import org.example.SearchPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,13 @@ import java.time.Duration;
 
 import static org.example.DriverFactory.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class SearchPageTest {
     WebDriver driver;
     HomePage home;
+    SearchPage search;
 
     private static final String baseURL = "http://localhost:3000";
     private static final String expectedPageTitle = "Search: · Nuxt Movies";
@@ -46,6 +49,8 @@ public class SearchPageTest {
         //getDriver();
         home = new HomePage(driver);
         home.clickSearch();
+        search =new SearchPage(driver);
+
 
     }
 
@@ -57,13 +62,12 @@ public class SearchPageTest {
 
     @Test
     void testPageMessage() throws InterruptedException {
-        //home.clickSearch();
-        WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(10));
-        //Thread.sleep(5000);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[text-4xl=''][op50=''][text-center='']")));
-        String pageMessageText = element.getText();
+        assertTrue(search.pageMessage());
+    }
 
-        assertEquals(expectedPageMessage, pageMessageText);
+    @Test
+    void testSearchResult(){
+        assertTrue(search.searchResult());
     }
 
     @AfterEach
