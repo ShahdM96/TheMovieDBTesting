@@ -1,3 +1,5 @@
+package UITest;
+
 import org.example.MoviePage;
 import org.example.SearchPage;
 import org.example.TVShowsPage;
