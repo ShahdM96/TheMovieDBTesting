@@ -21,7 +21,6 @@ public class SearchPage {
     public boolean isPageLoaded(){
         String actualTitle = driver.getTitle();
         System.out.println(actualTitle);
-
         String expectedPageTitle = "Search: · Nuxt Movies";
         return actualTitle.equals(expectedPageTitle);
     }
