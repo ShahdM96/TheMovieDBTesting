@@ -1,4 +1,4 @@
-name: Nux Movies testing
+name: UI testing
 
 on:
   workflow_dispatch:
@@ -37,14 +37,13 @@ jobs:
       - name: Launch standalone grid - Chrome
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
         run: |
-          docker run --name grid_container -d -p 3000:3000 --shm-size=2gb selenium/standalone-chrome:131.0-chromedriver-131.0-grid-4.27.0-20250101
+          docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-chrome:131.0-chromedriver-131.0-grid-4.27.0-20250101
 
       - name: Run Tests
         run: |
           export BROWSER=chrome
           export GRID_URL=${{ github.event.inputs.grid_url }}
-          ls -la
-          pwd
+          
           mvn test -Dtest=**/UITest/*
           
           # Tear down grid if exists
