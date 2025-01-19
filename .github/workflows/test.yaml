@@ -7,7 +7,7 @@ on:
         required: true
         type: string
         description: Grid to run tests on (local by default)
-        default: http://localhost:3000
+        default: http://localhost:4444
 
       chrome_131_0:
         description: 'Chrome (131.0)'
@@ -45,7 +45,7 @@ jobs:
           export GRID_URL=${{ github.event.inputs.grid_url }}
           ls -la
           pwd
-          mvn -q test -Dtest=HomePageTest
+          mvn test -Dtest=**/UITest/*
           
           # Tear down grid if exists
           docker stop grid_container || true
@@ -67,14 +67,14 @@ jobs:
       - name: Launch standalone grid - Firefox
         if: ${{ contains(github.event.inputs.grid_url, 'localhost') }}
         run: |
-          docker run --name grid_container -d -p 3000:3000 --shm-size=2gb selenium/standalone-firefox:133.0-geckodriver-0.35-grid-4.27.0-20250101
+          docker run --name grid_container -d -p 4444:4444 --shm-size=2gb selenium/standalone-firefox:133.0-geckodriver-0.35-grid-4.27.0-20250101
 
       - name: Run Tests
         run: |
           export BROWSER=firefox
           export GRID_URL=${{ github.event.inputs.grid_url }}
           
-          mvn test -Dtest=**/selenium/*
+          mvn test -Dtest=**/UITest/*
           
           # Tear down grid if exists
           docker stop grid_container || true
