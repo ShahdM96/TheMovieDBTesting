@@ -43,7 +43,7 @@ public class SearchPage {
         WebElement searchBox = driver.findElement(By.xpath("//input[@placeholder='Type to search...']"));
         searchBox.sendKeys("Star Wars");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement firstResultImage = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'aspect-10/16')]//img"))
         );
