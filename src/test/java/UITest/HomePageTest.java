@@ -1,13 +1,10 @@
 package UITest;
 
-import org.example.MoviePage;
-import org.example.SearchPage;
-import org.example.TVShowsPage;
+import org.example.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.example.HomePage;
 import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,7 +16,7 @@ public class HomePageTest {
 
     @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         home = new HomePage(driver);
     }
 

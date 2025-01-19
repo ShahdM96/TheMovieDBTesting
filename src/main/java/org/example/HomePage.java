@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,9 +13,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+import static org.example.DriverFactory.getDriver;
+
 public class HomePage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private WebDriverWait wait;
     private static final String baseURL ="http://localhost:3000";
 
@@ -33,7 +36,7 @@ public class HomePage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get(baseURL);
+
     }
 
     public boolean isPageLoaded(){
@@ -131,16 +134,6 @@ public class HomePage {
         //Return if the target movie is displayed on the screen
         return targetElement.isDisplayed();
 
-        // Assert that the element is displayed
-        //Assert.assertTrue(element.isDisplayed(), "Element is not displayed on the page!");
-//        element.click();
-//        element.click();
-//        element.click();
-//        element.click();
-//        element.click();
-//        for (WebElement suggestion : suggestions) {
-//            System.out.println("Suggestion: " + suggestion.getText());
-//        }
     }
 
     // Scroll to an element using JavaScript
