@@ -28,7 +28,7 @@ public class HomePageTest {
     public void setUp() {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://af04-2a06-c701-706a-c600-ac4d-52dd-b073-434a.ngrok-free.app/");
+        driver.get("https://5a82-2a06-c701-706a-c600-8173-b653-9f79-6b8c.ngrok-free.app/");
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
