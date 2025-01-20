@@ -36,7 +36,7 @@ public class SearchPageTest {
     public void setup() throws InterruptedException {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://5a82-2a06-c701-706a-c600-8173-b653-9f79-6b8c.ngrok-free.app/");
+        driver.get("https://bbaf-2a06-c701-706a-c600-9182-c758-f376-658d.ngrok-free.app/");
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
