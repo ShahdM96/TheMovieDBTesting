@@ -3,7 +3,6 @@ name: API testing
 on:
   workflow_dispatch:
 
-
 jobs:
   TestAPI:
     name: TestAPI

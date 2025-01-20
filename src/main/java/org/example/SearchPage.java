@@ -3,6 +3,7 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -40,19 +41,21 @@ public class SearchPage {
 
     public boolean searchResult(){
 
-        WebElement searchBox = driver.findElement(By.xpath("//input[@placeholder='Type to search...']"));
-        searchBox.sendKeys("Star Wars");
-
+        WebElement searchBox = driver.findElement(By.xpath("//input[@type='text']"));
+        searchBox.clear();
+        Actions actions = new Actions(driver);
+        actions.sendKeys(searchBox, "Star Wars").perform();
+        // Wait for the first result image to be visible
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement firstResultImage = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'aspect-10/16')]//img"))
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@href, '/movie/11')]//img[@alt='Star Wars']"))
         );
 
         // Get the alt attribute of the first result image
         String altText = firstResultImage.getAttribute("alt");
+
         if (altText != null && altText.contains("Star Wars")) {
-            return true;
-            //System.out.println("Test Passed: First search result contains 'Star Wars'.");
+            return true; // Test Passed
         } else {
             System.out.println("Test Failed: First search result does not contain 'Star Wars'.");
             return false;
