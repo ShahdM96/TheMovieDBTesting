@@ -132,6 +132,7 @@ public class HomePage {
         Actions actions = new Actions(driver);
         actions.scrollToElement(targetElement).perform();
         //Return if the target movie is displayed on the screen
+
         return targetElement.isDisplayed();
 
     }
@@ -146,7 +147,6 @@ public class HomePage {
         element.click();
         //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
-
 
     public class Main {
 

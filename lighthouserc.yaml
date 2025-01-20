@@ -1,0 +1,8 @@
+# lighthouse.yaml
+
+ci:
+  collect:
+    url:
+      - https://92c6-2a06-c701-706a-c600-9182-c758-f376-658d.ngrok-free.app  # change to your app url pages you want to test
+  upload:
+    target: temporary-public-storage

@@ -55,7 +55,7 @@ public class SearchPage {
         String altText = firstResultImage.getAttribute("alt");
 
         if (altText != null && altText.contains("Star Wars")) {
-            return true; // Test Passed
+            return true;
         } else {
             System.out.println("Test Failed: First search result does not contain 'Star Wars'.");
             return false;

@@ -22,13 +22,11 @@ public class HomePageTest {
     private WebDriver driver;
     HomePage home;
 
-
-
     @BeforeEach
     public void setUp() {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://bbaf-2a06-c701-706a-c600-9182-c758-f376-658d.ngrok-free.app/");
+        driver.get(" https://92c6-2a06-c701-706a-c600-9182-c758-f376-658d.ngrok-free.app");
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
@@ -40,13 +38,11 @@ public class HomePageTest {
         home = new HomePage(driver);
     }
 
-
     @Test
     void testHomeButton(){
         home.clickHome();
         assertTrue(home.isPageLoaded());
     }
-
 
     @Test
     void testMoviesButton() throws InterruptedException {
@@ -54,7 +50,6 @@ public class HomePageTest {
         assertTrue(moviepage.isPageLoaded());
 
     }
-
 
     @Test
     void testTVShowsButton() throws InterruptedException {
@@ -69,7 +64,6 @@ public class HomePageTest {
 
     }
 
-
     @Test
     void testChangeLanguage() throws InterruptedException {
         String language = "Español";
@@ -80,13 +74,11 @@ public class HomePageTest {
         assertTrue(bool);
     }
 
-
     @Test
     void testScrollSuggestions() throws InterruptedException {
             boolean display = home.scrollToElement();
             assertTrue(display);
     }
-
 
     @AfterEach
     public void tearDown() {
