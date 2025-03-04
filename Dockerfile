@@ -1,9 +1,13 @@
-FROM maven:3.8-openjdk-23-alpine
+# Start with a base Alpine image
+FROM openjdk:19-alpine
+
+# Install Maven
+RUN apk update && apk add maven
 
 WORKDIR /app
 
-# Copy the jar file
-COPY target/*.jar app.jar
+# Copy the entire project into the container
+COPY . .
 
 # Expose the port
 EXPOSE 8082
