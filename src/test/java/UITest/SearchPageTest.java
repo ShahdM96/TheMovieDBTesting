@@ -37,16 +37,18 @@ public class SearchPageTest {
         driver = getDriver();
         driver.manage().window().maximize();
         driver.get("http://localhost:3000/");
-        try {
-            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            //WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
-            //visitSiteButton.click();
-        } catch ( TimeoutException err) {
-            System.out.println("Ngrok warning page was not loaded");
-        }
-        //driver = DriverFactory.getDriver();
-        //driver.manage().window().maximize();
-        //getDriver();
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+//        try {
+//            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//            //WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
+//            //visitSiteButton.click();
+//        } catch ( TimeoutException err) {
+//            System.out.println("Ngrok warning page was not loaded");
+//        }
+        driver = DriverFactory.getDriver();
+        driver.manage().window().maximize();
+        getDriver();
         home = new HomePage(driver);
         home.clickSearch();
         search =new SearchPage(driver);

@@ -21,19 +21,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class HomePageTest {
     private WebDriver driver;
     HomePage home;
+    private static final String baseURL = "http://localhost:3000";
+    private static final String expectedPageTitle = "Nuxt Movies";
+    private static final String expectedPageMessage = "Type something to search...";
 
     @BeforeEach
     public void setUp() {
-        driver = getDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://localhost:3000/");
-        try {
-            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            //WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
-            //visitSiteButton.click();
-        } catch ( TimeoutException err) {
-            System.out.println("Ngrok warning page was not loaded");
-        }
+        driver.get(baseURL);
+//        driver = getDriver();
+//        driver.manage().window().maximize();
+//        driver.get("http://localhost:3000/");
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+//        try {
+//            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//            //WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
+//            //visitSiteButton.click();
+//        } catch ( TimeoutException err) {
+//            System.out.println("Ngrok warning page was not loaded");
+//        }
 //        driver = DriverFactory.getDriver();
         home = new HomePage(driver);
     }
