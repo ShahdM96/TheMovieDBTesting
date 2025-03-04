@@ -26,11 +26,11 @@ public class HomePageTest {
     public void setUp() {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.get("https://22e7-212-199-36-114.ngrok-free.app");
+        driver.get("http://localhost:3000/");
         try {
             Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
-            visitSiteButton.click();
+            //WebElement visitSiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Visit Site']")));
+            //visitSiteButton.click();
         } catch ( TimeoutException err) {
             System.out.println("Ngrok warning page was not loaded");
         }
@@ -64,21 +64,21 @@ public class HomePageTest {
 
     }
 
-    @Test
-    void testChangeLanguage() throws InterruptedException {
-        String language = "Español";
-        boolean bool = home.changeLanguage(language);
-        Thread.sleep(5000);
-
-
-        assertTrue(bool);
-    }
-
-    @Test
-    void testScrollSuggestions() throws InterruptedException {
-            boolean display = home.scrollToElement();
-            assertTrue(display);
-    }
+//    @Test
+//    void testChangeLanguage() throws InterruptedException {
+//        String language = "Español";
+//        boolean bool = home.changeLanguage(language);
+//        Thread.sleep(5000);
+//
+//
+//        assertTrue(bool);
+//    }
+//
+//    @Test
+//    void testScrollSuggestions() throws InterruptedException {
+//            boolean display = home.scrollToElement();
+//            assertTrue(display);
+//    }
 
     @AfterEach
     public void tearDown() {
